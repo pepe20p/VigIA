@@ -1,0 +1,49 @@
+
+main {
+    margin-bottom: 200px; /* Adicione a margem inferior desejada */
+}
+
+body {
+    width: 600px;
+    margin: 0 auto;
+}
+
+article {
+    display: flex; /* Adicione isso para tornar o article flexível */
+    flex-direction: column; /* Isso garante que o conteúdo seja empilhado verticalmente */
+    align-items: center; /* Isso centralizará horizontalmente o conteúdo dentro do article */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+form {
+	align-items: center;
+}
+
+footer {
+    margin-top: 20px; /* Adicione a margem superior desejada */
+    text-align: center;
+}
+ul {
+    padding-left: 0;
+    text-align: center;
+}
+.left,
+.right {
+    flex-basis: 20%;
+}
+
+.center {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.left img,
+.right img {
+    max-width: 100%;
+}

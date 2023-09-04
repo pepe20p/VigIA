@@ -1,11 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>VigIA</h1>
-</body>
+{% load static %}
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Homepage do Sistema VigIA</title>
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+	</head>
+	<body>
+		<header>
+			<div class="left">
+				<img src="static/images/camera1.png" width="100">
+			</div>
+			<div class="center">
+				<h1 class="tituloPcp">VigIA</h1>
+				<h2 class="subtituloPcp">O seu identificador de eventos</h2>
+			</div>
+			<div class="right">
+				<img src="static/images/camera2.png" width="110">
+			</div>
+		</header>
+		<nav>
+			<ul>
+				<a>Página Principal | </a>
+				<a href="paginas/sobre.html">Sobre | </a>
+				<a href="paginas/ajuda.html">Ajuda</a>
+			</ul>
+		</nav>
+		<main><!-- Corpo principal da página -->
+			<article>
+				<p>
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+					texto texto texto texto texto
+				</p>
+				<form>
+					<input type="upload" name="q" placeholder="Insira seu arquivo .MP4" />
+					<input type="submit" value="Enviar" />
+				</form>
+			</article>
+		</main>
+		<footer><!-- Rodapé da página -->
+			<p>Projeto da Disciplina de Engenharia de Software/UNIFESP - Grupo B</p>
+		</footer>
+	</body>
 </html>
