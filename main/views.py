@@ -6,5 +6,8 @@ def index(request):
 def contato(request):
     return render(request, 'contato.html')
 
-def faq(request):
-    return render(request, 'faq.html')
+def ajuda(request):
+    return render(request, 'ajuda.html')
+
+def sobre(request):
+    return render(request, 'sobre.html')
