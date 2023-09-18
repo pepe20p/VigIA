@@ -1,4 +1,5 @@
 {% load static %}
+
 <!doctype html>
 <html>
 	<head>
@@ -30,27 +31,25 @@
 		<main><!-- Corpo principal da página -->
 			<article>
 				<p>
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
-					texto texto texto texto texto
+					Bem vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada.
+					Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
 				</p>
-				<form>
-					<input type="upload" name="q" placeholder="Insira seu arquivo .MP4" />
-					<input type="submit" value="Enviar" />
-				</form>
+				<div class="forms">
+					{% if not uploaded %}
+					<p>
+						Faça o upload de um arquivo abaixo e experimente!
+					</p>
+					<form method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<input type="file" name="myfile">
+						<button type="submit">Upload</button>
+					</form>
+					{% endif %}
+					{% if uploaded %}
+					<p>O arquivo foi carregado - <a href="{{ uploaded }}">{{ uploaded }}</a></p>
+					{% endif %}
+				</div>
+				
 			</article>
 		</main>
 		<footer><!-- Rodapé da página -->
