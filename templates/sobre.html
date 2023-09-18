@@ -1,43 +1,21 @@
-{% load static %}
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Página Sobre o Sistema VigIA</title>
-		<link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
-	</head>
-	<body>
-		<header>
-			<div class="left">
-				<img src="{% static '/assets/camera1.png' %}" width="100">
-			</div>
-			<div class="center">
-				<h1 class="tituloPcp">VigIA</h1>
-				<h2 class="subtituloPcp">O seu identificador de eventos</h2>
-			</div>
-			<div class="right">
-				<img src="{% static '/assets/camera2.png' %}" width="110">
-			</div>
-		</header>
+{% extends "base.html" %}
+{% block header %}
 		<nav>
 			<ul>
 				<a href="{% url 'index' %}">Página Principal | </a>
-				<a>Sobre |</a>
+				<a>Sobre | </a>
 				<a href="{% url 'ajuda' %}">Ajuda | </a>
 				<a href="{% url 'contato' %}">Contato</a>
 			</ul>
 		</nav>
-		<main><!-- Corpo principal da página -->
-			<article>
-				<p>
-					Este é um projeto para a Disciplina de Engenharia de Software da Universidade Federal de São Paulo. Após realizar o upload do seu vídeo, uma Inteligência Artificial anlisará o vídeo, identificando diversos eventos e objetos em cena. A partir dessa análise, os TimeStamps de cada eventos são gerados e disponibilizados para o usuários. Com os TimeStamps em mãos, você poderá fazer buscas por tags específicas ou ver todos os eventos.
-			
-				</p>
-			</article>
-			<script src="scripts/scriptSobre.js"></script>
-		</main>
-		<footer><!-- Rodapé da página -->
-			<p>Projeto da Disciplina de Engenharia de Software/UNIFESP - Grupo B</p>
-		</footer>
-	</body>
-</html>
+{% endblock %}
+
+{% block content %} 
+	<article>
+		<p>
+			Este é um projeto para a Disciplina de Engenharia de Software da Universidade Federal de São Paulo. Após realizar o upload do seu vídeo, uma Inteligência Artificial anlisará o vídeo, identificando diversos eventos e objetos em cena. A partir dessa análise, os TimeStamps de cada eventos são gerados e disponibilizados para o usuários. Com os TimeStamps em mãos, você poderá fazer buscas por tags específicas ou ver todos os eventos.
+
+		</p>
+	</article>
+	<script src="scripts/scriptSobre.js"></script>
+{% endblock %}

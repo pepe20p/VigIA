@@ -1,42 +1,21 @@
-{% load static %}
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Página de contato do Sistema VigIA</title>
-		<link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
-	</head>
-	<body>
-		<header>
-			<div class="left">
-				<img src="{% static '/assets/camera1.png' %}" width="100">
-			</div>
-			<div class="center">
-				<h1 class="tituloPcp">VigIA</h1>
-				<h2 class="subtituloPcp">O seu identificador de eventos</h2>
-			</div>
-			<div class="right">
-				<img src="{% static '/assets/camera2.png' %}" width="110">
-			</div>
-		</header>
+{% extends 'base.html' %}
+
+{% block header %}
 		<nav>
 			<ul>
 				<a href="{% url 'index' %}">Página Principal | </a>
-                <a href="{% url 'sobre' %}">Sobre | </a>
-                <a href="{% url 'ajuda' %}">Ajuda | </a>
-				<a>Contato </a>
+				<a href="{% url 'sobre' %}">Sobre | </a>
+				<a href="{% url 'ajuda' %}">Ajuda | </a>
+				<a >Contato</a>
 			</ul>
 		</nav>
-		<main><!-- Corpo principal da página -->
-			<article>
-				<p>
-					Em construção!
-				</p>
-			</article>
-			<script src="scripts/scriptSobre.js"></script>
-		</main>
-		<footer><!-- Rodapé da página -->
-			<p>Projeto da Disciplina de Engenharia de Software/UNIFESP - Grupo B</p>
-		</footer>
-	</body>
-</html>
+{% endblock %}
+	
+
+{% block content%}
+<article>
+	<p>
+		Em construção!
+	</p>
+</article>
+{%endblock%}

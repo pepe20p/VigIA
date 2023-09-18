@@ -1,59 +1,40 @@
-{% load static %}
+{% extends 'base.html' %}
+{% block header %}
+<nav>
+	<ul>
+		<a>Página Principal | </a>
+		<a href="{% url 'sobre' %}">Sobre | </a>
+		<a href="{% url 'ajuda' %}">Ajuda | </a>
+		<a href="{% url 'contato' %}">Contato</a>
+	</ul>
+</nav>
+{% endblock %}
+{% block content%}
+<article>
+	<p>
+		Bem vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada.
+		Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
+	</p>
+	<div class="forms">
+		{% if not uploaded %}
+		<p>
+			Faça o upload de um arquivo abaixo e experimente!
+		</p>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<input type="file" name="myfile">
+			<button type="submit">Upload</button>
+		</form>
+		{% else %}
+		<p>
+			Upload concluído!
+		</p>
+		<video width="320" height="240" controls>
+			<source src="{{ uploaded }}" type="video/mp4">
+		  </video> 
+		{% endif %}
 
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>Homepage do Sistema VigIA</title>
-		<link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
-	</head>
-	<body>
-		<header>
-			<div class="left">
-				<img src="{% static '/assets/camera1.png' %}" width="100">
-			</div>
-			<div class="center">
-				<h1 class="tituloPcp">VigIA</h1>
-				<h2 class="subtituloPcp">O seu identificador de eventos</h2>
-			</div>
-			<div class="right">
-				<img src="{% static '/assets/camera2.png' %}" width="110">
-			</div>
-		</header>
-		<nav>
-			<ul>
-				<a>Página Principal | </a>
-				<a href="{% url 'sobre' %}">Sobre | </a>
-				<a href="{% url 'ajuda' %}">Ajuda | </a>
-				<a href="{% url 'contato' %}">Contato</a>
-			</ul>
-		</nav>
-		<main><!-- Corpo principal da página -->
-			<article>
-				<p>
-					Bem vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada.
-					Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
-				</p>
-				<div class="forms">
-					{% if not uploaded %}
-					<p>
-						Faça o upload de um arquivo abaixo e experimente!
-					</p>
-					<form method="post" enctype="multipart/form-data">
-						{% csrf_token %}
-						<input type="file" name="myfile">
-						<button type="submit">Upload</button>
-					</form>
-					{% endif %}
-					{% if uploaded %}
-					<p>O arquivo foi carregado - <a href="{{ uploaded }}">{{ uploaded }}</a></p>
-					{% endif %}
-				</div>
-				
-			</article>
-		</main>
-		<footer><!-- Rodapé da página -->
-			<p>Projeto da Disciplina de Engenharia de Software/UNIFESP - Grupo B</p>
-		</footer>
-	</body>
-</html>
+	</div>
+	
+</article>
+{%endblock%}
