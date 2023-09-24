@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
 
-{% block content%}
+{% block content %}
 <article>
-	<p>
-		Olá! Bem vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada.
-		Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
-	</p>
-	<div class="forms">
-		{% if not uploaded %}
-		<p>
-			Faça o upload de um arquivo abaixo e experimente!
-		</p>
-		<form method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<input type="file" name="myfile">
-			<button type="submit">Upload</button>
-		</form>
-		{% else %}
-		<p>
-			Upload concluído!
-		</p>
-		<video width="320" height="240" controls>
-			<source src="{{ uploaded }}" type="video/mp4">
-		  </video> 
-		{% endif %}
-
-	</div>
-	
+    <p>
+        Olá! Bem vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada. Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
+    </p>
+    <div class="forms">
+        {% if not uploaded %}
+        <p>
+            Faça o upload de um arquivo abaixo e experimente!
+        </p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="myfile">
+            <button type="submit">Upload</button>
+        </form>
+        {% else %}
+        <p>
+            Upload concluído!
+			<meta http-equiv="refresh" content="0;url={% url 'video' %}">
+			<title>Redirecionando...</title>
+			<p>Se você não for redirecionado, <a href="{% url 'video' %}">clique aqui</a>.</p>
+</body>
+        </p>
+        {% endif %}
+    </div>
 </article>
-{%endblock%}
+{% endblock %}

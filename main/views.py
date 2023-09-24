@@ -39,3 +39,7 @@ def ajuda(request):
 def sobre(request):
     context = contexto_menu()
     return render(request, 'sobre.html', context)
+    
+def video(request):
+    context = contexto_menu()
+    return render(request, 'video.html', context)
