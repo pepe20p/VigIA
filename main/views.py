@@ -6,6 +6,7 @@ import shutil
 from django.conf import settings
 from main.models import MenuPrincipal
 import os
+import json
 
 def contexto_menu():
     query_set = MenuPrincipal.objects.all()
@@ -41,5 +42,18 @@ def sobre(request):
     return render(request, 'sobre.html', context)
     
 def video(request):
+    with open('IA/events.json') as time_stamps_json:
+        time_stamps_file = json.load(time_stamps_json)
+    
+    fps = 30
+    video_length = 18
     context = contexto_menu()
+    fs = FileSystemStorage()
+    dict = fs.listdir(fs.location)
+    file = fs.url(dict[1][0])
+
+    context["file"] = file
+    context["time_stamps_file"] = time_stamps_file
+    context["fps"] = fps
+    context["video_length"] = video_length
     return render(request, 'video.html', context)

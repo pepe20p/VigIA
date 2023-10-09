@@ -3,14 +3,35 @@ main {
     margin-bottom: 200px; /* Adicione a margem inferior desejada */
     
 }
-
+button {
+  background-color: rgba(51, 51, 51, 0.05);
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 body {
     width: 600px;
     margin: 0 auto;
     font-family: "Open sans", sans-serif;
 }
 
-article {
+article, .forms {
     display: flex; /* Adicione isso para tornar o article flexível */
     flex-direction: column; /* Isso garante que o conteúdo seja empilhado verticalmente */
     align-items: center; /* Isso centralizará horizontalmente o conteúdo dentro do article */
@@ -42,13 +63,37 @@ ul {
 }
 
 .center {
+    display: flex;
+    justify-content: space-between;
     flex-grow: 1;
     text-align: center;
-	align-items: center;
-    justify-content: center;
 }
 
 .left img,
 .right img {
     max-width: 100%;
 }
+
+.list {
+    background-color: aliceblue;
+    width: 200px;
+    height: 240px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    padding: 20px;
+    
+}
+.list_items {
+    list-style: none;
+}
+.time_stamp_item {
+    width:100%;
+    border-top: 1px solid #32a1ce;
+    border-bottom: 1px solid #32a1ce;
+}
+
+.time_stamp_item:hover {
+    background-color: #78defa;
+
+  }
