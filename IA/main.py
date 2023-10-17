@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import json
 import os
+import sys
 
 fps = 0.0
 
@@ -147,7 +148,11 @@ def identifyEvents(video):
 
 if __name__ == '__main__':
     
-    video = "video-test1.mp4"
+    if len(sys.argv) != 2:
+        print('Uso: main.py <Nome do video e formato>')
+        exit()
+
+    video = sys.argv[1]
 
     destroyAlreadyCreatedFile()
 
