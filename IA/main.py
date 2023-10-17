@@ -55,6 +55,48 @@ def writeToFile(events, filename):
     with open(filename, "w") as file:
         json.dump(frames, file, indent=1)
 
+
+# tolerance: máximo numero de frames que um evento pode não ocorrer/não ser detectado no vídeo e ainda ser considerado o mesmo evento
+def groupFramesByEvent(input_filename, output_filename, tolerance=1):
+
+    tolerance = int(tolerance)
+
+    # Carrega o arquivo JSON original
+    with open(input_filename, "r") as file:
+        data = json.load(file)
+
+    # Extrai o FPS do JSON original
+    fps = data[0]["fps"]
+
+    # Extrai os eventos e os frames associados
+    events_data = data[1:]
+    event_dict = {}  # Dicionário para armazenar eventos e frames associados
+
+    for event_info in events_data:
+        frame = event_info['frame']
+        events = event_info['events']
+
+        for event in events:
+            if event not in event_dict:
+                event_dict[event] = []
+            
+            # Verifica se o frame atual é consecutivo ao último frame do evento
+            if event_dict[event] and (frame - event_dict[event][-1][-1]) <= tolerance:
+                event_dict[event][-1] = (event_dict[event][-1][0], frame)  # Atualiza o frame final
+            else:
+                event_dict[event].append((frame, frame))  # Inicia um novo intervalo de frames
+
+    # Cria a lista de eventos únicos com frames associados
+    unique_events = [{"event": event, "frames": frames} for event, frames in event_dict.items()]
+
+    # Adiciona o FPS como o primeiro elemento no arquivo de saída
+    unique_events.insert(0, {"fps": fps})
+
+    # Escreve o resultado no novo arquivo JSON
+    with open(output_filename, "w") as output_file:
+        json.dump(unique_events, output_file, indent=2)
+
+
 def identifyEvents(video):
 
     global fps
@@ -104,8 +146,9 @@ def identifyEvents(video):
     return events
 
 if __name__ == '__main__':
+    
+    video = "video-test1.mp4"
 
-    video = "video-test.mp4"
     destroyAlreadyCreatedFile()
 
     events = identifyEvents(video)
@@ -113,3 +156,5 @@ if __name__ == '__main__':
     # Escreve o que sobrou
     if(events):
         writeToFile(events, "events.json")
+    
+    groupFramesByEvent("events.json", "groupedframes.json", tolerance=fps*5)
