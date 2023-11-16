@@ -24,24 +24,35 @@
 		
 		<nav>
 			<ul>
-				{% if itens_menu %}
-					<ul>| 
-						{% for item_menu in itens_menu %}
-							{% if item_menu.url_menu == request.resolver_match.url_name %}
-								<span>{{ item_menu.item_menu }} |</span>
-							{% else %}
-								<a href="{% url item_menu.url_menu %}">{{ item_menu.item_menu }} |</a>
+				{% if usuario %}
+					{% if itens_menu %}
+						<ul>| 
+							{% for item_menu in itens_menu %}
+								{% if item_menu.url_menu == request.resolver_match.url_name %}
+									<span>{{ item_menu.item_menu }} |</span>
+								{% else %}
+										<a href="{% url item_menu.url_menu %}">{{ item_menu.item_menu }} |</a>
+								{% endif %}
+							{% endfor %}
+								
+							{% if usuario.perfil == 'admin' %}
+								<a href="{% url 'admin:index' %}">Admin |</a>
 							{% endif %}
-						{% endfor %}
-					</ul>
-				{% else %}
-					<a href="{% url 'index' %}">Página Principal | </a>
-					<a href="{% url 'sobre' %}">Sobre | </a>
-					<a href="{% url 'ajuda' %}">Ajuda | </a>
-					<a href="{% url 'contato' %}">Contato</a>
+							<a href="{% url 'logout' %}?next={% url 'index' %}">Logout |</a>
+						</ul>
+					{% else %}
+						<a href="{% url 'home' %}">Página Principal | </a>
+						<a href="{% url 'sobre' %}">Sobre | </a>
+						<a href="{% url 'ajuda' %}">Ajuda | </a>
+						<a href="{% url 'contato' %}">Contato</a>
+						<a href="{% url 'logout' %}?next={% url 'index' %}">Logout |</a>
+					{% endif %}
 				{% endif %}
 			</ul>
 		</nav>
+		{% if usuario %}
+			<div align="center">Usuário logado: {{ usuario.nome }}</div>
+		{% endif %}
 		{% endblock %}
 		<main><!-- Corpo principal da página -->
 			{% block content %}

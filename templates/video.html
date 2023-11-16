@@ -2,91 +2,96 @@
 {% load static %}
 
 {% block content %}
+	{% if not usuario %}
+        <script>
+            window.location.href = "{% url 'viewLogin' %}";
+        </script>
+    {% else %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<div class="center">
-	<div id="videoMessage" style="display: none;">Nenhum vídeo encontrado. Faça o upload na página Home.</div>
-    <div>
-        <video width="320" height="240" id="Video">
-            <source src="{{ file }}" type="video/mp4" />
-        </video>
-        <div id="buttonbar" style="width:320px">
-        </div>
-    </div>
-    <div class="list">
-    <ul class='list_items'>
-        {% for item in time_stamps_file %}
-            <li class="time_stamp_item" onclick="func(this, {{fps}}, {{video_length}})">
-                <p> Frame: <p id="frame">{{ item.frame }}</p> </p>
-                <p> Eventos: <p>{{ item.events }}</p> </p>
-            </li>
-        {% endfor %}
-    </ul>
-    </div>
-</div>
+		<div class="center">
+			<div id="videoMessage" style="display: none;">Nenhum vídeo encontrado. Faça o upload na página Home.</div>
+			<div>
+				<video width="320" height="240" id="Video">
+					<source src="{{ file }}" type="video/mp4" />
+				</video>
+				<div id="buttonbar" style="width:320px">
+				</div>
+			</div>
+			<div class="list">
+			<ul class='list_items'>
+				{% for item in time_stamps_file %}
+					<li class="time_stamp_item" onclick="func(this, {{fps}}, {{video_length}})">
+						<p> Frame: <p id="frame">{{ item.frame }}</p> </p>
+						<p> Eventos: <p>{{ item.events }}</p> </p>
+					</li>
+				{% endfor %}
+			</ul>
+			</div>
+		</div>
 
 
-<script>
-    
-	function func(ctrl, fps, videoLenght) {
-        let totalFrames = fps * videoLenght;
-        let frame = parseInt(ctrl.getElementsByTagName("p")[1].innerHTML);
-        var video = document.getElementById("Video");
+		<script>
+			
+			function func(ctrl, fps, videoLenght) {
+				let totalFrames = fps * videoLenght;
+				let frame = parseInt(ctrl.getElementsByTagName("p")[1].innerHTML);
+				var video = document.getElementById("Video");
 
-        $("li").css('cursor', 'pointer');
-        video.currentTime = Math.round(frame/fps);
-        
-    };
+				$("li").css('cursor', 'pointer');
+				video.currentTime = Math.round(frame/fps);
+				
+			};
 
-	function check_video_availability(video_src) {
-	var xhr = new XMLHttpRequest();
-	xhr.open('HEAD', video_src, true);
+			function check_video_availability(video_src) {
+			var xhr = new XMLHttpRequest();
+			xhr.open('HEAD', video_src, true);
 
-	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 404) {
-				// Vídeo não encontrado, exibir mensagem de erro
-				var video_message = document.getElementById("videoMessage");
-				video_message.style.display = 'block';
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 404) {
+						// Vídeo não encontrado, exibir mensagem de erro
+						var video_message = document.getElementById("videoMessage");
+						video_message.style.display = 'block';
+					}
+				}
+			};
+
+			xhr.send();
 			}
-		}
-	};
+			
+			var video_src = "{{ file }}";
+			check_video_availability(video_src);
+			
+			function vidplay() {
+				var video = document.getElementById("Video");
+				var button = document.getElementById("play");
+				if (video.paused) {
+					video.play();
+					button.textContent = "||";
+				} else {
+					video.pause();
+					button.textContent = ">";
+				}
+			}
 
-	xhr.send();
-	}
-	
-	var video_src = "{{ file }}";
-    check_video_availability(video_src);
-	
-	function vidplay() {
-        var video = document.getElementById("Video");
-        var button = document.getElementById("play");
-        if (video.paused) {
-            video.play();
-            button.textContent = "||";
-        } else {
-            video.pause();
-            button.textContent = ">";
-        }
-    }
+			function restart() {
+				var video = document.getElementById("Video");
+				video.currentTime = 0;
+			}
 
-    function restart() {
-        var video = document.getElementById("Video");
-        video.currentTime = 0;
-    }
+			function skip(value) {
+				var video = document.getElementById("Video");
+				video.currentTime += value;
+			}
 
-    function skip(value) {
-        var video = document.getElementById("Video");
-        video.currentTime += value;
-    }
-
-    $(document).ready(function () {
-        var segundos = 5;
-        document.getElementById("buttonbar").innerHTML = '<button id="restart" onclick="restart();">restart</button>\n' +
-            '<button id="rew" onclick="skip(-' + segundos + ')">-' + segundos + '</button>\n' +
-            '<button id="play" onclick="vidplay()">></button>\n' +
-            '<button id="fastFwd" onclick="skip(' + segundos + ')">+' + segundos + '</button>';
-    });
-</script>
+			$(document).ready(function () {
+				var segundos = 5;
+				document.getElementById("buttonbar").innerHTML = '<button id="restart" onclick="restart();">restart</button>\n' +
+					'<button id="rew" onclick="skip(-' + segundos + ')">-' + segundos + '</button>\n' +
+					'<button id="play" onclick="vidplay()">></button>\n' +
+					'<button id="fastFwd" onclick="skip(' + segundos + ')">+' + segundos + '</button>';
+			});
+		</script>
+	{% endif %}
 {% endblock %}
