@@ -77,7 +77,7 @@ def identifyEvents(video):
     model.setInputParams(size=(416, 416), scale=1/255) # da CFG
 
     # Captura de video da bibioteca do OpenCV
-    cap = cv2.VideoCapture(video)
+    cap = cv2.VideoCapture("../media/{}".format(video))
     fps = cap.get(cv2.CAP_PROP_FPS)
 
     second_of_frame = int(fps)

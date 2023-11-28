@@ -26,7 +26,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        	'ENGINE': 'django.db.backends.oracle',
+	        'NAME': 'XE',
+        	'USER': 'system',
+	        'PASSWORD': 'vigia',
+        	'HOST': 'localhost',  # Ou o endereço do seu servidor Oracle, se estiver em outro lugar
+	        'PORT': '',  # Deixe vazio para usar a porta padrão
     }
 }
 

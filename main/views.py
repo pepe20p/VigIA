@@ -8,6 +8,7 @@ from django.conf import settings
 from django.urls import reverse
 from main.models import MenuPrincipal, CustomUser
 import shutil
+import requests
 import os
 import json
 
@@ -80,6 +81,8 @@ def home(request):
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
+        print(filename)
+        chamada = requests.get("http://127.0.0.1:8001/{}".format(filename))
         upload = fs.url(filename)
         context['uploaded'] = upload
         
@@ -98,7 +101,7 @@ def sobre(request):
     return render(request, 'sobre.html', context)
     
 def video(request):
-    with open('IA/events.json') as time_stamps_json:
+    with open('API/events.json') as time_stamps_json:
         time_stamps_file = json.load(time_stamps_json)
     
     fps = 30
