@@ -1,21 +1,33 @@
 [
  {
-  "fps": 120.0
+  "fps": 30.0
  },
  {
-  "frame": 0,
+  "frame": 13,
   "events": [
    "person"
   ]
  },
  {
-  "frame": 120,
+  "frame": 66,
   "events": [
    "person"
   ]
  },
  {
-  "frame": 121,
+  "frame": 201,
+  "events": [
+   "person"
+  ]
+ },
+ {
+  "frame": 210,
+  "events": [
+   "person"
+  ]
+ },
+ {
+  "frame": 211,
   "events": [
    "person"
   ]

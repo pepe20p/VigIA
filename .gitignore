@@ -134,6 +134,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.vigia_venv
 env/
 venv/
 ENV/
