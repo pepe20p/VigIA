@@ -2,8 +2,14 @@
 
 {% block content%}
 <article>
-	<p>
-		Em construção!
-	</p>
+	{% if not usuario %}
+        <script>
+            window.location.href = "{% url 'viewLogin' %}";
+        </script>
+    {% else %}
+		<p>
+			Em construção!
+		</p>
+	{% endif %}
 </article>
 {%endblock%}
