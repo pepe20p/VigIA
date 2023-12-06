@@ -2,22 +2,14 @@
 
 {% block content %}
 <article>
-    <p>
-        Olá! Bem-vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada. Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
-    </p>
+
     <div class="forms">
         {% if not user.is_authenticated %}
-        <p>
-            Faça o login para usar nosso sistema!
-        </p>
         <form method="post" action="{% url 'viewLogin' %}">
             {% csrf_token %}
 
-            <label for="username">Usuário:</label>
-            <input type="text" name="username" required><br>
-
-            <label for="password">Senha:</label>
-            <input type="password" name="password" required><br>
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="password" required><br>
 
             <button type="submit">Login</button>
         </form>
