@@ -9,14 +9,14 @@ class Event:
     def add_event(self, event):
         self.events.append(event)
 
-    def addFrameToEvent(self, frame):
+    def add_frame_to_event(self, frame):
 
         second_of_frame = int(get_fps())
 
         if (not self.events) or ((self.events[-1].frame < frame) and frame % second_of_frame == 0):
             self.events.append(Event(frame))
 
-    def insertEvent(self, frame, found_event):
+    def insert_event(self, frame, found_event):
 
         for event in self.events:
             frame_event = event.frame

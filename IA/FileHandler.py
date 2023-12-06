@@ -2,11 +2,11 @@ from utils import *
 
 class FileHandler():
 
-    def destroyAlreadyCreatedFile(self):
+    def destroy_already_created_file(self):
         if os.path.exists("events.json"):
             os.remove("events.json")
 
-    def writeToFile(self, events, filename):
+    def write_to_file(self, events, filename):
         
         frames = []
 
@@ -27,7 +27,7 @@ class FileHandler():
         with open(filename, "w") as file:
             json.dump(frames, file, indent=1)
 
-    def groupFramesByEvent(self, input_filename, output_filename, tolerance=1):
+    def group_frames_by_event(self, input_filename, output_filename, tolerance=1):
 
         tolerance = int(tolerance)
 

@@ -15,14 +15,14 @@ if __name__ == '__main__':
     set_fps(fps)
        
     file = FileHandler()
-    file.destroyAlreadyCreatedFile()
+    file.destroy_already_created_file()
 
     event_detector = EventDetector()
 
-    events = event_detector.identifyEvents(video)
+    events = event_detector.identify_events(video)
 
     # Escreve o que sobrou
     if(events):
-        file.writeToFile(events, "events.json")
+        file.write_to_tile(events, "events.json")
     
-    file.groupFramesByEvent("events.json", "groupedframes.json", tolerance=fps*5)
+    file.group_frames_by_event("events.json", "groupedframes.json", tolerance=fps*5)

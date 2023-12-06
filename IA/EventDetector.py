@@ -7,7 +7,7 @@ events = Event(current_frame)
 
 class EventDetector():
 
-    def identifyEvents(self, video):
+    def identify_events(self, video):
 
         global current_frame
 
@@ -39,8 +39,8 @@ class EventDetector():
             # Analisa se é uma classe desejada e possui precisao maior ou igual a 60%
             if found_class in util_class_names and score >= get_precision():
 
-                events.addFrameToEvent(current_frame)
-                events.insertEvent(current_frame, found_class)
+                events.add_frame_to_event(current_frame)
+                events.insert_event(current_frame, found_class)
 
     
     def is_time_to_write(self, current_frame):
@@ -50,5 +50,5 @@ class EventDetector():
         second_of_frame = int(get_fps())
 
         if(current_frame != 0 and current_frame % second_of_frame == 0):
-            FileHandler().writeToFile(events.events, "events.json")
+            FileHandler().write_to_file(events.events, "events.json")
             events = Event(current_frame)
