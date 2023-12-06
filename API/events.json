@@ -3,6 +3,24 @@
   "fps": 30.0
  },
  {
+  "frame": 0,
+  "events": [
+   "person"
+  ]
+ },
+ {
+  "frame": 30,
+  "events": [
+   "person"
+  ]
+ },
+ {
+  "frame": 31,
+  "events": [
+   "person"
+  ]
+ },
+ {
   "frame": 60,
   "events": [
    "person"
@@ -10,18 +28,6 @@
  },
  {
   "frame": 61,
-  "events": [
-   "person"
-  ]
- },
- {
-  "frame": 90,
-  "events": [
-   "person"
-  ]
- },
- {
-  "frame": 91,
   "events": [
    "person"
   ]

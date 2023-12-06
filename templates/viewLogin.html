@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <article>
 
-    <div class="forms">
+    <div class="forms" id="input_form">
+        <h1>Login</h1>
+        <hr>
         {% if not user.is_authenticated %}
-        <form method="post" action="{% url 'viewLogin' %}">
+        <form class="login_form" method="post" action="{% url 'viewLogin' %}">
             {% csrf_token %}
 
-            <input type="text" name="username" placeholder="Username" required><br>
-            <input type="password" name="password" placeholder="password" required><br>
+            <input class ="login_input" type="text" name="username" placeholder="Username" required><br>
+            <input class ="login_input" type="password" name="password" placeholder="Password" required><br>
 
-            <button type="submit">Login</button>
+            <button type="submit" id="login_button">Login</button>
         </form>
         
-        <p>Não tem uma conta? <a href="{% url 'criarUsuario' %}">Crie uma agora</a>.</p>
+        <p style="padding:2%;">Não tem uma conta? <a href="{% url 'criarUsuario' %}">Crie uma agora</a>.</p>
         
         {% if messages %}
             <ul class="messages">

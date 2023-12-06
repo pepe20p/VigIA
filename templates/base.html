@@ -7,43 +7,45 @@
 		<title>Homepage do Sistema VigIA</title>
 		<link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel="stylesheet">
 		<link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 		{% block header %}
 		<header>
 		
 			<h1 class="vigia_title"> VigIA</h1>
-			<nav class="header_nav">
-				<ul>
-						{% if itens_menu %}
-							<ul>| 
-								{% for item_menu in itens_menu %}
-									{% if item_menu.url_menu == request.resolver_match.url_name %}
-										<span>{{ item_menu.item_menu }} |</span>
-									{% else %}
-											<a href="{% url item_menu.url_menu %}">{{ item_menu.item_menu }} |</a>
+				<nav class="header_nav">
+					<ulclass="header_nav">
+							{% if itens_menu %}
+								<ul class="list_base">
+									{% for item_menu in itens_menu %}
+										{% if item_menu.url_menu == request.resolver_match.url_name %}
+											<span>{{ item_menu.item_menu }} </span>
+										{% else %}
+												<a href="{% url item_menu.url_menu %}">{{ item_menu.item_menu }} </a>
+										{% endif %}
+									{% endfor %}
+										
+									{% if usuario.perfil == 'admin' %}
+										<a href="{% url 'admin:index' %}">Admin </a>
 									{% endif %}
-								{% endfor %}
-									
-								{% if usuario.perfil == 'admin' %}
-									<a href="{% url 'admin:index' %}">Admin |</a>
-								{% endif %}
-								<a href="{% url 'logout' %}?next={% url 'index' %}">Logout |</a>
-							</ul>
-						{% else %}
-							<a href="{% url 'home' %}" style="text-decoration:none">Página Principal </a>
-							<a href="{% url 'sobre' %}" style="text-decoration:none">Sobre  </a>
-							<a href="{% url 'ajuda' %}" style="text-decoration:none">Ajuda  </a>
-							<a href="{% url 'contato' %}" style="text-decoration:none">Contato</a>
-							<a href="{% url 'logout' %}?next={% url 'index' %}" style="text-decoration:none">Logout </a>
-						{% endif %}
-				</ul>
-			</nav>
-			{% if usuario %}
-				<div align="center">{{ usuario.nome }}</div>
-			{% else %}
-				<button class="signup" style="background-color: black;"> <a href="{% url 'criarUsuario' %}" style="color: #D9D9D9">Sign Up</a> </button>
-			{% endif %}
+									<a href="{% url 'logout' %}?next={% url 'index' %}">Logout </a>
+								</ul>
+							{% else %}
+								<a href="{% url 'home' %}" style="text-decoration:none">Home </a>
+								<a href="{% url 'sobre' %}" style="text-decoration:none">Sobre  </a>
+								<a href="{% url 'ajuda' %}" style="text-decoration:none">Ajuda  </a>
+								<a href="{% url 'contato' %}" style="text-decoration:none">Contato</a>
+								<a href="{% url 'logout' %}?next={% url 'index' %}" style="text-decoration:none">Logout </a>
+							{% endif %}
+					</ul>
+				</nav>
+				{% if usuario %}
+					<div align="center">{{ usuario.nome }}</div>
+				{% else %}
+					<button class="signup" style="background-color: black;"> <a href="{% url 'criarUsuario' %}" style="color: #D9D9D9">Sign Up</a> </button>
+				{% endif %}
+
 		</header>
 		
 		{% endblock %}
