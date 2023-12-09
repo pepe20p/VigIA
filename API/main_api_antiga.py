@@ -1,8 +1,10 @@
+from fastapi import FastAPI, Request
 import cv2
 import numpy as np
 import json
 import os
-import sys
+
+app = FastAPI()
 
 fps = 0.0
 
@@ -15,8 +17,8 @@ class Event:
         self.events.append(event)
 
 def destroyAlreadyCreatedFile():
-    if os.path.exists("API/events.json"):
-        os.remove("API/events.json")
+    if os.path.exists("events.json"):
+        os.remove("events.json")
 
 
 def addFrameToEvent(events, frame):
@@ -64,18 +66,18 @@ def identifyEvents(video):
     events = []
     actual_frame = 0
 
-    with open("API/coconames", "r") as f:
+    with open("coconames", "r") as f:
         class_names = [cname.strip() for cname in f.readlines()]
-    with open("API/utilnames", "r") as f:
+    with open("utilnames", "r") as f:
         util_class_names = [cname.strip() for cname in f.readlines()]
 
     # Redes pré-treinadas YOLO
-    net = cv2.dnn.readNet("API/yolov7-tiny.weights", "API/yolov7-tiny.cfg")
+    net = cv2.dnn.readNet("yolov7-tiny.weights", "yolov7-tiny.cfg")
     model = cv2.dnn.DetectionModel(net)
     model.setInputParams(size=(416, 416), scale=1/255) # da CFG
 
     # Captura de video da bibioteca do OpenCV
-    cap = cv2.VideoCapture("media/{}".format(video))
+    cap = cv2.VideoCapture("../media/{}".format(video))
     fps = cap.get(cv2.CAP_PROP_FPS)
 
     second_of_frame = int(fps)
@@ -97,7 +99,7 @@ def identifyEvents(video):
                 insertEvent(events, actual_frame, found_class)
 
         if(actual_frame != 0 and actual_frame % second_of_frame == 0):
-            writeToFile(events, "API/{}.json".format(video))
+            writeToFile(events, "events.json")
             events = []
 
         has_video, frame = cap.read()
@@ -105,13 +107,10 @@ def identifyEvents(video):
     
     return events
 
-def gerar_events(arquivo):
-    if arquivo != None:
-        destroyAlreadyCreatedFile()
-        events = identifyEvents(arquivo)
-        if events == False : return "Video não encontrado"
-        return "Ok"
-    else:
-        return "Arquivo não encontrado"
-arquivo = sys.argv[1]
-gerar_events(arquivo)
+@app.get("/{arquivo}")
+def read_root(arquivo):
+    
+    destroyAlreadyCreatedFile()
+    events = identifyEvents(arquivo)
+    if events == False : return {"Situação": "Video não encontrado"}
+    return {"Situação": "Ok"}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content%}
+<article>
+	{% if not usuario %}
+        <script>
+            window.location.href = "{% url 'viewLogin' %}";
+        </script>
+    {% else %}
+		<script src="{% static 'js/carregando.js' %}"></script>
+		<p>
+			Processando...
+		</p>
+		<br>
+		<p>
+			Caso queira enviar um email, utilize o seguinte email: suporte@vigia.com
+	{% endif %}
+</article>
+{%endblock%}

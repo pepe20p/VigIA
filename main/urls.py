@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import index, home, contato, ajuda, sobre, video, viewLogin, criarUsuario
+from main.views import index, home, contato, ajuda, sobre, video, viewLogin, criarUsuario,carregando
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
@@ -11,6 +11,7 @@ urlpatterns = [
     path('contato/', contato, name='contato'),
     path('ajuda/', ajuda, name='ajuda'),
     path('sobre/', sobre, name='sobre'),
+    path('carregando/', carregando, name='carregando'),
     path('video/', video, name='video'),
     path('viewLogin/', viewLogin, name='viewLogin'),
     path('criarUsuario/', criarUsuario, name='criarUsuario'),
