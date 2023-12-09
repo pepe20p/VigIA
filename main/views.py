@@ -7,6 +7,8 @@ from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.urls import reverse
 from main.models import MenuPrincipal, CustomUser
+import subprocess
+import sys
 import shutil
 import requests
 import os
@@ -82,9 +84,11 @@ def home(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         print(filename)
-        chamada = requests.get("http://127.0.0.1:8001/{}".format(filename))
+        #chamada = requests.get("http://127.0.0.1:8001/{}".format(filename))
+        subprocess.Popen([sys.executable, 'API/main.py', '{}'.format(filename)])
         upload = fs.url(filename)
         context['uploaded'] = upload
+        request.session["arquivo"] = filename
         
     return render(request, 'home.html', context)
 
@@ -101,7 +105,8 @@ def sobre(request):
     return render(request, 'sobre.html', context)
     
 def video(request):
-    with open('API/events.json') as time_stamps_json:
+    filename = request.session["arquivo"]
+    with open('API/{}.json'.format(filename)) as time_stamps_json:
         time_stamps_file = json.load(time_stamps_json)
     
     fps = 30
@@ -116,3 +121,7 @@ def video(request):
     context["fps"] = fps
     context["video_length"] = video_length
     return render(request, 'video.html', context)
+
+def carregando(request):
+    context = contexto_base(request)
+    return render(request, 'carregando.html', context)

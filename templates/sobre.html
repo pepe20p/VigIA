@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %} 
 	<article>
 		{% if not usuario %}
@@ -7,7 +7,7 @@
 				window.location.href = "{% url 'viewLogin' %}";
 			</script>
 		{% else %}
-			<p>
+			<p class="sobre">
 				Este é um projeto para a Disciplina de Engenharia de Software da Universidade Federal de São Paulo. Após realizar o upload do seu vídeo, uma Inteligência Artificial anlisará o vídeo, identificando diversos eventos e objetos em cena. A partir dessa análise, os TimeStamps de cada eventos são gerados e disponibilizados para o usuários. Com os TimeStamps em mãos, você poderá fazer buscas por tags específicas ou ver todos os eventos.
 
 			</p>

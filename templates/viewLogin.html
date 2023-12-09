@@ -1,28 +1,22 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <article>
-    <p>
-        Olá! Bem-vindos ao VigIA! Com o VigIA, simplificamos a análise de vídeos de câmeras de segurança. Nossa plataforma permite que você identifique e busque por eventos importantes em seus vídeos, facilitando uma busca aprimorada. Assim, é possível saber exatamente quando um carro ou uma pessoa passou por sua câmera de segurança ou então verificar se algo de seu interesse aparece em algum momento da gravação.
-    </p>
-    <div class="forms">
+
+    <div class="forms" id="input_form">
+        <h1>Login</h1>
+        <hr>
         {% if not user.is_authenticated %}
-        <p>
-            Faça o login para usar nosso sistema!
-        </p>
-        <form method="post" action="{% url 'viewLogin' %}">
+        <form class="login_form" method="post" action="{% url 'viewLogin' %}">
             {% csrf_token %}
 
-            <label for="username">Usuário:</label>
-            <input type="text" name="username" required><br>
+            <input class ="login_input" type="text" name="username" placeholder="Username" required><br>
+            <input class ="login_input" type="password" name="password" placeholder="Password" required><br>
 
-            <label for="password">Senha:</label>
-            <input type="password" name="password" required><br>
-
-            <button type="submit">Login</button>
+            <button type="submit" id="login_button">Login</button>
         </form>
         
-        <p>Não tem uma conta? <a href="{% url 'criarUsuario' %}">Crie uma agora</a>.</p>
+        <p style="padding:2%;">Não tem uma conta? <a href="{% url 'criarUsuario' %}">Crie uma agora</a>.</p>
         
         {% if messages %}
             <ul class="messages">

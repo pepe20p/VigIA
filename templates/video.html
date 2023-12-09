@@ -9,9 +9,9 @@
     {% else %}
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+		<div id="videoMessage" style="display: none;">Nenhum vídeo encontrado. Faça o upload na página Home.</div>
 		<div class="center">
-			<div id="videoMessage" style="display: none;">Nenhum vídeo encontrado. Faça o upload na página Home.</div>
-			<div>
+			<div class="video">
 				<video width="320" height="240" id="Video">
 					<source src="{{ file }}" type="video/mp4" />
 				</video>

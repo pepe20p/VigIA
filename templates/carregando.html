@@ -1,4 +1,6 @@
-{% extends 'base.html' %}	
+{% extends 'base.html' %}
+{% load static %}
+
 
 {% block content%}
 <article>
@@ -7,8 +9,9 @@
             window.location.href = "{% url 'viewLogin' %}";
         </script>
     {% else %}
+		<script src="{% static 'js/carregando.js' %}"></script>
 		<p>
-			Para entrar em contato conosco pelo github: https://github.com/pepe20p/VigIA
+			Processando...
 		</p>
 		<br>
 		<p>
